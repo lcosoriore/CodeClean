@@ -49,23 +49,16 @@ internal class Program
         {
             Console.WriteLine("Ingrese el número de la tarea a remover: ");
             // Show current taks
-            for (int i = 0; i < TaskList.Count; i++)
-            {
-                Console.WriteLine((i + 1) + ". " + TaskList[i]);
-            }
-            Console.WriteLine("----------------------------------------");
+            ShowTaskList();
 
             string readTaskNumber = Console.ReadLine();
             // Remove one position
             int indexToRemove = Convert.ToInt32(readTaskNumber) - 1;
-            if (indexToRemove > -1)
+            if (indexToRemove > -1 && TaskList.Count > 0)
             {
-                if (TaskList.Count > 0)
-                {
                     string taskDescription = TaskList[indexToRemove];
                     TaskList.RemoveAt(indexToRemove);
                     Console.WriteLine("Tarea " + taskDescription + " eliminada");
-                }
             }
         }
         catch (Exception)
@@ -95,12 +88,17 @@ internal class Program
         }
         else
         {
-            Console.WriteLine("----------------------------------------");
-            for (int i = 0; i < TaskList.Count; i++)
-            {
-                Console.WriteLine((i + 1) + ". " + TaskList[i]);
-            }
-            Console.WriteLine("----------------------------------------");
+            ShowTaskList();
         }
+    }
+
+    public static void ShowTaskList()
+    {
+        Console.WriteLine("----------------------------------------");
+        int indexTask = 0;
+        TaskList.ForEach(task => Console.WriteLine(++indexTask + ". " + task));
+       
+        Console.WriteLine("----------------------------------------");
+
     }
 }
